@@ -14,13 +14,13 @@ func getIndex(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	println(indexFile)
 	content := bytes.NewReader(indexFile)
 	if err != nil {
 		panic(err)
 	}
 	http.ServeContent(w, r, "index.html", time.Now(), content)
 }
+
 func getCss(w http.ResponseWriter, r *http.Request) {
 	cssFile, err := os.ReadFile("./static/css/style.css")
 	if err != nil {
@@ -35,7 +35,7 @@ func getCss(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	mux := http.NewServeMux()
-	pages, errDir := GetDirPages("./static/pages/")
+	pages, errDir := GetPagesTitles("./static/pages/")
 	if errDir != nil {
 		println("dir not found")
 	}
